@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <style>
+    body {
+  background: skyblue;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+h1{
+  color: white;
+  background-color: skyblue;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.calculator {
+  background:black;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  width: 320px;
+}
+
+#display {
+  width: 100%;
+  height: 60px;
+  font-size: 2em;
+  margin-bottom: 20px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  text-align: right;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  
+}
+
+button {
+  font-size: 1.5em;
+  padding: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 40%;
+}
+
+button:hover {
+  background-color: #777;
+}
+
+button:active {
+  background-color: #999;
+}
+.operator{
+  background-color: #ff9500;
+}
+.result{
+  background-color: green;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div class="calculator">
+     <h1>Calculator</h1>
+    <input type="text" id="display" disabled />
+    <div class="buttons">
+      <button onclick="clearScreen()">C</button>
+      <button onclick="removeLast()">←</button>
+      <button onclick="displayElement('%')" class="operator">%</button>
+      <button onclick="displayElement('/')" class="operator">/</button>
+
+      <button onclick="displayElement('7')">7</button>
+      <button onclick="displayElement('8')">8</button>
+      <button onclick="displayElement('9')">9</button>
+      <button onclick="displayElement('*')" class="operator">*</button>
+
+      <button onclick="displayElement('4')">4</button>
+      <button onclick="displayElement('5')">5</button>
+      <button onclick="displayElement('6')">6</button>
+      <button onclick="displayElement('-')"class="operator">−</button>
+
+      <button onclick="displayElement('1')">1</button>
+      <button onclick="displayElement('2')">2</button>
+      <button onclick="displayElement('3')">3</button>
+      <button onclick="displayElement('+')" class="operator">+</button>
+
+      <button onclick="displayElement('0')">0</button>
+      <button onclick="displayElement('00')">00</button>
+      <button onclick="displayElement('.')">.</button>
+      <button onclick="calculate()" class="result">=</button>
+    </div>
+  </div>
+<script>
+  const display = document.getElementById("display");
+
+function displayElement(value) {
+  display.value += value;
+}
+
+function clearScreen() {
+  display.value = "";
+}
+
+function removeLast() {
+  display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+  try {
+    display.value = eval(display.value.replace('%', '/100'));
+  } catch (error) {
+    display.value = "Error";
+  }
+}
+
+</script>
+</body>
+</html>
